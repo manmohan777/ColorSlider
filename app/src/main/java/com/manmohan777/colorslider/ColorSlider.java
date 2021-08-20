@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 
-public class PaletteBar extends View {
+public class ColorSlider extends View {
     public static final String TAG = "PaletteBar";
 
 
@@ -34,7 +34,7 @@ public class PaletteBar extends View {
     static private int mCurrentIntColor, mCurrentHueColor = 180; //default selected color i.e. teal
 
     float[] hsv = new float[3];
-    private PaletteBarListener mListener;
+    private ColorSliderListener mListener;
     private boolean sizeChanged;
     private static float outerCircleRadius;
     private static float innerCircleRadius;
@@ -43,15 +43,15 @@ public class PaletteBar extends View {
     private static int trackMarkHeightDP = 10;
 
 
-    public PaletteBar(Context context) {
+    public ColorSlider(Context context) {
         this(context, null);
     }
 
-    public PaletteBar(Context context, AttributeSet attrs) {
+    public ColorSlider(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public PaletteBar(Context context, AttributeSet attrs, int defStyle) {
+    public ColorSlider(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         init(context);
@@ -129,11 +129,20 @@ public class PaletteBar extends View {
     }
 
     /**
-     * Get the current colour
+     * Get the current Hue colour
      */
-    public int getCurrentColor() {
+    public int getCurrentHueColor() {
         return mCurrentHueColor;
     }
+
+    /**
+     * Get the current int colour
+     */
+    public int getCurrentColor() {
+        float[] hsv = new float[]{mCurrentHueColor, 100, 100};
+        return Color.HSVToColor(hsv);
+    }
+
 
     @Override
     public void setEnabled(boolean enabled) {
@@ -196,7 +205,7 @@ public class PaletteBar extends View {
         return (int) (dpValue * scale + 0.5f);
     }
 
-    public void setListener(PaletteBarListener listener) {
+    public void setListener(ColorSliderListener listener) {
         mListener = listener;
 
         // We'll start listening for touches now that the implementer cares about them
@@ -210,10 +219,11 @@ public class PaletteBar extends View {
     /**
      * Interface for receiving color selection
      */
-    public interface PaletteBarListener {
+    public interface ColorSliderListener {
         void onHueColorSelected(int colorHue);
 
-        void onColorSelected(int color);
+        void onColorSelected(int colorInt);
+
 
     }
 
