@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
 <b> colorSlider.setColor(60); </b>  is used to set the color palette selected of the Clolor Slider.
 
-<b> getCurrentColor(); </b>  is used to get selected int color of the slider Color Slider.
+<b> colorSlider.getCurrentColor(); </b>  is used to get selected int color of the slider Color Slider.
 
-<b> getCurrentHueColor(); </b>  is used to get selected hue color of the slider Color Slider.
+<b> colorSlider.getCurrentHueColor(); </b>  is used to get selected hue color of the slider Color Slider.
 
 
 
